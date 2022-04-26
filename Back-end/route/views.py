@@ -36,11 +36,11 @@ class ManagerList(APIView):
 
 class RouteList(APIView):
     def get(self, request, format=None):
-        manager = Manager.objects.all()
-        serializers = ManagerSerializer(manager, many=True)
+        route = Route.objects.all()
+        serializers = RouteSerializer(route, many=True)
         return Response(serializers.data)
     def post(self, request, format=None):
-        serializers = ManagerSerializer(data=request.data)
+        serializers = RouteSerializer(data=request.data)
         if serializers.is_valid():
             serializers.save()
             return Response(serializers.data, status=status.HTTP_201_CREATED)
