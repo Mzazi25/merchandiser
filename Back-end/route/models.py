@@ -14,3 +14,19 @@ class Merchandiser(models.Model):
     location = models.CharField(max_length=100, null=True, blank=True)
     def __str__(self):
         return str(self.username.username)
+
+class Manager(models.Model):
+    name = models.OneToOneField(User, on_delete=models.CASCADE, blank=True,related_name='manager')
+    description = models.TextField(blank=True)
+    route_plan = models.ManyToManyField(User,blank=True,related_name='route_plan')
+    phone_number = models.CharField(max_length=15, blank=True, validators=[phone_number_validator])
+    location = models.CharField(max_length=100, null=True, blank=True)
+    def __str__(self):
+        return str(self.name.name)
+    @property
+    def route_plan(self):
+        return self.route_plan.all().count()
+ROUTE_PLAN = (
+    ('Assigned', 'Unassigned'),
+    ('In-progress','Not-on-progress'),
+)
