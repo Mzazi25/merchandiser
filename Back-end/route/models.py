@@ -31,10 +31,20 @@ ROUTE_PLAN = (
     ('In-progress','Not-on-progress'),
 )
 
-class route(models.Model):
+class Route(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     location = models.CharField(max_length=100, null=True, blank=True)
     route = models.CharField(choices=ROUTE_PLAN, default='Unassigned',max_length=10)
     
     def __str__(self):
-        return str(self.post)
+        return str(self.location)
+
+class Comment(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now_add=True)
+    comment = models.ForeignKey(Route,on_delete=models.CASCADE,related_name="comments")
+    content = models.TextField()
+    
+    def __str__(self):
+        return str(self.user.user)
+
