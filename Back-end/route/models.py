@@ -30,3 +30,11 @@ ROUTE_PLAN = (
     ('Assigned', 'Unassigned'),
     ('In-progress','Not-on-progress'),
 )
+
+class route(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    location = models.CharField(max_length=100, null=True, blank=True)
+    route = models.CharField(choices=ROUTE_PLAN, default='Unassigned',max_length=10)
+    
+    def __str__(self):
+        return str(self.post)
