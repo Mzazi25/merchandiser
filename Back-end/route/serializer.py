@@ -11,4 +11,7 @@ class ManagerSerializer(serializers.ModelSerializer):
         model = Manager
         fields = ('name', 'description', 'route_plan','phone_number', 'location')
 
-
+class RouteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Route
+        fields = ('user', 'location', 'route')
