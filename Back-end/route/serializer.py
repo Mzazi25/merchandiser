@@ -4,12 +4,12 @@ from .models import Merchandiser,Manager,Address
 class MerchandiserSerializer(serializers.ModelSerializer):
     class Meta:
         model = Merchandiser
-        fields = ('username', 'route', 'phone_number','email', 'location')
+        fields = ('username', 'phone_number','email', 'location')
 
 class ManagerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Manager
-        fields = ('name', 'description', 'route_plan','phone_number', 'location')
+        fields = ('name', 'description', 'phone_number', 'location')
 
 class RouteSerializer(serializers.ModelSerializer):
     class Meta:
