@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .models import  Merchandiser,Manager,Route,Comment
+from .models import  Merchandiser,Manager,Comment, Address
 from .serializer import MerchandiserSerializer,ManagerSerializer,RouteSerializer
 from rest_framework import status
 from .permissions import IsAdminOrReadOnly
@@ -36,7 +36,7 @@ class ManagerList(APIView):
 
 class RouteList(APIView):
     def get(self, request, format=None):
-        route = Route.objects.all()
+        route = Address.objects.all()
         serializers = RouteSerializer(route, many=True)
         return Response(serializers.data)
     def post(self, request, format=None):

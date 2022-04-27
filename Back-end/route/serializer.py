@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Merchandiser,Manager,Route
+from .models import Merchandiser,Manager,Address
 
 class MerchandiserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -13,5 +13,5 @@ class ManagerSerializer(serializers.ModelSerializer):
 
 class RouteSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Route
-        fields = ('user', 'location', 'route')
+        model = Address
+        fields = ('city', 'location')
