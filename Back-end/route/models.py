@@ -33,6 +33,7 @@ class Address(models.Model):
     location = PlainLocationField(based_fields=['city'], zoom=7)
 
 
+
 class Comment(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     comment = models.ForeignKey(Address,on_delete=models.CASCADE,related_name="comments", default="")
