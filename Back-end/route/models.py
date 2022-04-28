@@ -19,6 +19,7 @@ class Merchandiser(models.Model):
     phone_number = models.CharField(max_length=15, validators=[phone_number_validator])
     email = models.EmailField()
     location = PlainLocationField(based_fields=['city'], zoom=7)
+
     def __str__(self):
         return str(self.username.username)
 
@@ -27,6 +28,12 @@ class Manager(models.Model):
     description = models.TextField()
     phone_number = models.CharField(max_length=15, validators=[phone_number_validator])
     location = PlainLocationField(based_fields=['city'], zoom=7)
+
+    def __str__(self):
+        return str(self.name.username)
+
+    def save_manager(self):
+        self.save()
 
 class Address(models.Model):
     city = models.CharField(max_length=255,)
@@ -42,4 +49,7 @@ class Comment(models.Model):
     
     def __str__(self):
         return str(self.user.user)
+
+    def save_comment(self):
+        self.save()
 
