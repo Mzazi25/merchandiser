@@ -1,6 +1,6 @@
 .container-fluid{
     /* background-image: url('/assets/background.jpeg'); */
-    background-color: blue;
+    background-color: black;
     background-repeat: no-repeat;
     background-size: cover;
     height: 100vh;
@@ -14,7 +14,7 @@
 }
 
 nav {
-    background-color:rgba(0, 0, 255, .2);
+    background-color:rgba(0, 0, 255, .4);
     color: white;
     justify-content: space-around;
 }
@@ -25,7 +25,9 @@ nav {
 }
 .heading {
     padding: 2rem;
-    font-size: 30px;
+    font-size: 35px;
+    font-family: 'Oleo Script Swash Caps', cursive;
+    
 }
 span{
     display: block;
