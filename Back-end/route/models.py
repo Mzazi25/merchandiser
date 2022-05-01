@@ -21,7 +21,10 @@ class Merchandiser(models.Model):
     location = PlainLocationField(based_fields=['city'], zoom=7)
 
     def __str__(self):
-        return str(self.username.username)
+        return self.username
+
+    def save_merch(self):
+        self.save()
 
 class Manager(models.Model):
     name = models.CharField(max_length=40)
@@ -30,7 +33,7 @@ class Manager(models.Model):
     location = PlainLocationField(based_fields=['city'], zoom=7)
 
     def __str__(self):
-        return str(self.name.username)
+        return self.name
 
     def save_manager(self):
         self.save()
@@ -39,7 +42,11 @@ class Address(models.Model):
     city = models.CharField(max_length=255,)
     location = PlainLocationField(based_fields=['city'], zoom=7)
 
+    def __str__(self):
+        return self.city
 
+    def save_address(self):
+        self.save()
 
 class Comment(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
