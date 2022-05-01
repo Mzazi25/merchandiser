@@ -1,0 +1,32 @@
+.container-fluid{
+    /* background-image: url('/assets/background.jpeg'); */
+    background-color: blue;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    color: white;
+
+}
+.nav-item img {
+    height: 3rem;
+    width: 3.5rem;
+
+}
+
+nav {
+    background-color:rgba(0, 0, 255, .2);
+    color: white;
+    justify-content: space-around;
+}
+.btn {
+    background-color: black;
+    height: 2.5rem;
+    width: 5.5rem;
+}
+.heading {
+    padding: 2rem;
+    font-size: 30px;
+}
+span{
+    display: block;
+}
