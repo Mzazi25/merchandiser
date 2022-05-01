@@ -7,11 +7,13 @@ import { AppComponent } from './app.component';
 import { MapComponent } from './map/map.component';
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
+import { HomedetailsComponent } from './homedetails/homedetails.component';
 @NgModule({
   declarations: [
     AppComponent,
     MapComponent,
-    HomeComponent
+    HomeComponent,
+    HomedetailsComponent
   ],
   imports: [
     BrowserModule,
