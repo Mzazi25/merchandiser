@@ -13,39 +13,17 @@ from route.models import Manager, Merchandiser
 class MerchandiserSignupView(generics.GenericAPIView):
     serializer_class =MerchandiserSignupSerializer
     
-
-    # def get(self,request,format=None):
-    #     merchandisers = Merchandiser.objects.all()
-    #     serializers = MerchandiserSignupSerializer(merchandisers,many=True)
-    #     return Response(serializers.data)
-
     def post(self,request,*args,**kwargs):
         serializer=self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        user= self.request.user
+        user=serializer.save()
         # token = Token.objects.create(user)
-        return Response(serializer.data
-            # 'user':UserSerializer(user,context=self.get_serializer_context()).data,
-            # 'token':token[1]
-           
-        )
-class LoginMerch(generics.GenericAPIView):
-    serializer_class = LoginMechSerializer
-    def post(self, request):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        user = serializer.validated_data
         return Response({
-            "user": UserSerializer(user, context=self.get_serializer_context()).data,
-            "token": Token.objects.create(user)[1]
-            })
-class MainUser(generics.RetrieveAPIView):
-    permissions_classes = [
-        permissions.IsAuthenticated
-    ]
-    serializer_class = UserSerializer
-    def get_object(self):
-        return self.request.user
+            'user':UserSerializer(user,context=self.get_serializer_context()).data,
+            'token':Token.objects.get(user=user).key,
+
+           
+        })
 
 class ManagerSignupView(generics.GenericAPIView):
     serializer_class = ManagerSignupSerializer
@@ -54,22 +32,23 @@ class ManagerSignupView(generics.GenericAPIView):
     def post(self,request,*args,**kwargs):
         serializer=self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        user=self.request.user
-        return Response( serializer.data
-        #    'user':UserSerializer(user,context=self.get_serializer_context()).data,
-            # 'token':Token.objects.get(user=user).key,
-            # 'message':'account succesfully created'
-        )
+        user=serializer.save()
+        return Response( {
+           'user':UserSerializer(user,context=self.get_serializer_context()).data,
+            'token':Token.objects.get(user=user).key,
+            'message':'account succesfully created'
+        })
 class CustomAuthToken(ObtainAuthToken):
     def post(self,request,*args,**kwargs):
         serializer=self.serializer_class(data=request.data,context={'request':request})
-        serializer.is_valid(raise_excepion=True)
+        serializer.is_valid(raise_exception=True)
         user=serializer.validated_data['user']
         token,created=Token.objects.get_or_create(user=user)
         return Response({
             'token':token.key,
             'user_id':user.pk,
-            'is_client':user.is_client
+            'is_manager':user.is_manager,
+            'is_merchandiser':user.is_merchandiser
         })
 class LogoutView(APIView):
     def post(self,request,format=None):

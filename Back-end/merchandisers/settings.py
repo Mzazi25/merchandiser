@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'route',
+    'route.apps.RouteConfig',
     'django.contrib.sites',
     'allauth',
     'allauth.account',
@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'rest_auth.registration',
     'rest_framework.authtoken', 
     'corsheaders',
-    'allauth.socialaccount',
+    # 'allauth.socialaccount',
 ]
 SITE_ID = 1
 REST_FRAMEWORK = {
