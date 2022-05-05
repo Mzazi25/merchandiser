@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Merchandiser,Manager,Address
+from .models import Merchandiser,Manager,Address,User
 
 class MerchandiserSerializer(serializers.ModelSerializer):
     class Meta:

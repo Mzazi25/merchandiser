@@ -1,19 +1,18 @@
-from ast import Add
-from email.policy import default
-from signal import default_int_handler
 from django.db import models
 from django.core.validators import RegexValidator
-from django.contrib.gis.geos import Point
-
 from django.contrib.auth import get_user_model
 from location_field.models.plain import PlainLocationField
-from django import forms
+from rest_framework.authtoken.models import Token
+
 
 User = get_user_model()
 phone_number_validator = RegexValidator(
     regex=r'^[0-9 \(\)]{10,12}$', message="Phone numbers must begin with +2547.... or 07..."
 )
 # Create your models here.
+
+
+
 class Merchandiser(models.Model):
     username = models.CharField(max_length=40)
     phone_number = models.CharField(max_length=15, validators=[phone_number_validator])
