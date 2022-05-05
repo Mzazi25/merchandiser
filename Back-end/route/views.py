@@ -13,6 +13,7 @@ class MerchandiserList(APIView):
         merch = Merchandiser.objects.all()
         serializers = MerchandiserSerializer(merch, many=True)
         return Response(serializers.data)
+
     def post(self, request, format=None):
         serializers = MerchandiserSerializer(data=request.data)
         if serializers.is_valid():
@@ -26,6 +27,7 @@ class ManagerList(APIView):
         manager = Manager.objects.all()
         serializers = ManagerSerializer(manager, many=True)
         return Response(serializers.data)
+
     def post(self, request, format=None):
         serializers = ManagerSerializer(data=request.data)
         if serializers.is_valid():
@@ -39,6 +41,7 @@ class RouteList(APIView):
         route = Address.objects.all()
         serializers = RouteSerializer(route, many=True)
         return Response(serializers.data)
+        
     def post(self, request, format=None):
         serializers = RouteSerializer(data=request.data)
         if serializers.is_valid():
