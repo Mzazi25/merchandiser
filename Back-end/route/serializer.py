@@ -75,7 +75,7 @@ class MerchandiserSerializer(serializers.ModelSerializer):
 class ManagerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Manager
-        fields = ('name', 'description', 'phone_number', 'location')
+        fields = ("name", "description", "phone_number", "location")
 
 class RouteSerializer(serializers.ModelSerializer):
     class Meta:

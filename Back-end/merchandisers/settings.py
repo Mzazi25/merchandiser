@@ -107,7 +107,7 @@ WSGI_APPLICATION = 'merchandisers.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME':'routes',
+        'NAME':'routeplan',
         'USER': 'moringa',
         'PASSWORD':'1234',
     }

@@ -8,7 +8,6 @@ from route.permissions import IsManagerUser,IsMerchandiserUser
 from route.models import Manager, Merchandiser
 
 
-from rest_framework.views import APIView
 from .models import  Merchandiser,Manager,Comment, Address
 from .serializer import MerchandiserSerializer,ManagerSerializer,RouteSerializer
 from rest_framework import status
@@ -27,7 +26,7 @@ class MerchandiserSignupView(generics.GenericAPIView):
         return Response({
             'user':UserSerializer(user,context=self.get_serializer_context()).data,
             'token':Token.objects.get(user=user).key,
-
+            'message':'account succesfully created'
            
         })
 
@@ -88,7 +87,7 @@ class MerchandiserList(APIView):
             serializers.save()
             return Response(serializers.data, status=status.HTTP_201_CREATED)
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
-    permission_classes = (IsAdminOrReadOnly,)
+    # permission_classes = (IsAdminOrReadOnly,)
 
 class ManagerList(APIView):
     def get(self, request, format=None):
@@ -102,12 +101,12 @@ class ManagerList(APIView):
             serializers.save()
             return Response(serializers.data, status=status.HTTP_201_CREATED)
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
-    permission_classes = (IsAdminOrReadOnly,)
+    # permission_classes = (IsAdminOrReadOnly,)
 
 class RouteList(APIView):
     def get(self, request, format=None):
-        route = Address.objects.all()
-        serializers = RouteSerializer(route, many=True)
+        routes = Address.objects.all()
+        serializers = RouteSerializer(routes, many=True)
         return Response(serializers.data)
         
     def post(self, request, format=None):
@@ -116,4 +115,4 @@ class RouteList(APIView):
             serializers.save()
             return Response(serializers.data, status=status.HTTP_201_CREATED)
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
-    permission_classes = (IsAdminOrReadOnly,)
+    # permission_classes = (IsAdminOrReadOnly,)
