@@ -11,13 +11,9 @@ from location_field.models.plain import PlainLocationField
 from rest_framework.authtoken.models import Token
 
 
-User = get_user_model()
-phone_number_validator = RegexValidator(
-    regex=r'^[0-9 \(\)]{10,12}$', message="Phone numbers must begin with +2547.... or 07..."
-)
-# Create your models here.
 
 # Create your models here.
+
 
 
 class User(AbstractUser):
@@ -48,7 +44,10 @@ class Manager(models.Model):
         return self.user.username
 
 
-
+User = get_user_model()
+phone_number_validator = RegexValidator(
+    regex=r'^[0-9 \(\)]{10,12}$', message="Phone numbers must begin with +2547.... or 07..."
+)
 class Merchandiser(models.Model):
     username = models.CharField(max_length=40)
     phone_number = models.CharField(max_length=15, validators=[phone_number_validator])

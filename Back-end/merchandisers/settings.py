@@ -33,7 +33,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     # 'rest_framework',
-    # 'route',
+    'route.apps.RouteConfig',
     'rest_framework.authtoken',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -41,13 +41,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'route.apps.RouteConfig',
+    # 'route.apps.RouteConfig',
     'django.contrib.sites',
     'allauth',
     'allauth.account',
     'rest_auth',
     'rest_auth.registration',
-    'rest_framework.authtoken', 
     'corsheaders',
     # 'allauth.socialaccount',
     'location_field.apps.DefaultConfig',
@@ -65,7 +64,7 @@ REST_FRAMEWORK = {
     # ]
 }
 SITE_ID = 1
-AUTH_USER_MODEL = 'route.User'
+AUTH_USER_MODEL ='route.User'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_AUTHENTICATION_METHOD = 'username'
 ACCOUNT_EMAIL_VERIFICATION = 'none'
