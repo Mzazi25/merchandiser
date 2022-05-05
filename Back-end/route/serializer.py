@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from route .models import Manager,Merchandiser,User
+from route .models import Manager,Merchandiser,User,Address
 from rest_auth.registration.serializers import RegisterSerializer
 from django.contrib.auth import authenticate
 
@@ -65,3 +65,19 @@ class ManagerSignupSerializer(serializers.ModelSerializer):
             Manager.objects.create(user=user)
             return user
     
+
+
+class MerchandiserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Merchandiser
+        fields = ('username', 'phone_number','email', 'location')
+
+class ManagerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Manager
+        fields = ('name', 'description', 'phone_number', 'location')
+
+class RouteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Address
+        fields = ('city', 'location')

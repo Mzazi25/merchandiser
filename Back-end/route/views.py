@@ -1,6 +1,4 @@
-from itsdangerous import serializer
-from rest_auth.registration.views import RegisterView
-from route.serializer import ManagerSignupSerializer,MerchandiserSignupSerializer,UserSerializer,LoginMechSerializer
+from route.serializer import ManagerSignupSerializer,MerchandiserSignupSerializer,UserSerializer
 from rest_framework import generics,status,permissions
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
@@ -9,6 +7,14 @@ from rest_framework.views import APIView
 from route.permissions import IsManagerUser,IsMerchandiserUser
 from route.models import Manager, Merchandiser
 
+
+from rest_framework.views import APIView
+from .models import  Merchandiser,Manager,Comment, Address
+from .serializer import MerchandiserSerializer,ManagerSerializer,RouteSerializer
+from rest_framework import status
+from .permissions import IsAdminOrReadOnly
+
+# Create your views here.
 
 class MerchandiserSignupView(generics.GenericAPIView):
     serializer_class =MerchandiserSignupSerializer
@@ -68,3 +74,46 @@ class MerchandiserOnlyView(generics.RetrieveAPIView):
 
     def get_object(self):
         return self.request.user
+
+
+class MerchandiserList(APIView):
+    def get(self, request, format=None):
+        merch = Merchandiser.objects.all()
+        serializers = MerchandiserSerializer(merch, many=True)
+        return Response(serializers.data)
+
+    def post(self, request, format=None):
+        serializers = MerchandiserSerializer(data=request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data, status=status.HTTP_201_CREATED)
+        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+    permission_classes = (IsAdminOrReadOnly,)
+
+class ManagerList(APIView):
+    def get(self, request, format=None):
+        manager = Manager.objects.all()
+        serializers = ManagerSerializer(manager, many=True)
+        return Response(serializers.data)
+
+    def post(self, request, format=None):
+        serializers = ManagerSerializer(data=request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data, status=status.HTTP_201_CREATED)
+        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+    permission_classes = (IsAdminOrReadOnly,)
+
+class RouteList(APIView):
+    def get(self, request, format=None):
+        route = Address.objects.all()
+        serializers = RouteSerializer(route, many=True)
+        return Response(serializers.data)
+        
+    def post(self, request, format=None):
+        serializers = RouteSerializer(data=request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data, status=status.HTTP_201_CREATED)
+        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+    permission_classes = (IsAdminOrReadOnly,)
