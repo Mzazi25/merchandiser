@@ -6,7 +6,6 @@ botocore==1.24.32
 cachetools==5.0.0
 certifi==2021.10.8
 charset-normalizer==2.0.12
-click==8.0.4
 cloudinary==1.29.0
 colorama==0.4.3
 confusable-homoglyphs==3.2.0
